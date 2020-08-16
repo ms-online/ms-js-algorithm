@@ -1,20 +1,14 @@
-// function sumNumbers(numbers) {
-//   return numbers[0] + numbers[1] + numbers[2]; // 1 => O(1) => 常数时间复杂度
-// }
+// 如何返回斐波那契数列中下标为n的元素？
 
-function sumNumbers(numbers) {
-  // let result = 0; // 1
-  // for (const number of numbers) {
-  //   // 1
-  //   console.log('123'); // 3 => n
-  //   result += number; // 3 => n
-  // }
-  // return result; // 1
-  return numbers.reduce((sum, number) => sum + number, 0); // O(n) =>线性时间复杂度
+function fib(n) {
+  const numbers = [1, 1];
+  for (let i = 2; i < n + 1; i++) {
+    numbers.push(numbers[i - 2] + numbers[i - 1]);
+  }
+  console.log(numbers);
+  return numbers[n];
 }
 
-// T = 1 + 1 + n + n + 1  = 3 + 2n = 3 + 2*n;
-// T = 2*n;
-// T = n => O(n) => 线性时间复杂度
-
-console.log(sumNumbers([1, 4, 7, 10]));
+console.log(fib(4));
+console.log(fib(5));
+console.log(fib(6));
