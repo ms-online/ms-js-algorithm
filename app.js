@@ -20,6 +20,10 @@ function isPowerOfTwo(number) {
   return true;
 }
 
+// 最好情况： 13 => O(1);
+// 平均情况：O(log n)
+// 最差情况： 1125899906842624 => O(log n) 对数时间复杂度
+
 console.log(isPowerOfTwo(5));
 console.log(isPowerOfTwo(8));
 console.log(isPowerOfTwo(12));
