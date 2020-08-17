@@ -1,22 +1,27 @@
-// 判断一个输入数字是否为质数?
-
-function isPrime(number) {
-  for (let i = 2; i < Math.sqrt(number); i++) {
-    // 1
-    console.log('123'); // n
-    if (number % i === 0) {
-      // n
-      return false; // 1
-    }
+function isPowerOfTwo(number) {
+  if (number < 1) {
+    return false;
   }
-  return true; // 1
+  // if (number % 2 !== 0) {
+  //   return false;
+  // }
+  // return true;
+  // 12 / 2 = 6
+  // 6 / 2 = 3
+  // 3 / 2 = 1 ··· 1（余数）
+
+  let dividedNumber = number;
+  while (dividedNumber !== 1) {
+    if (dividedNumber % 2 !== 0) {
+      return false;
+    }
+    dividedNumber = dividedNumber / 2;
+  }
+  return true;
 }
 
-// 最好情况： number = 1 或者 number 2 => T = 1 + 1  = 2 => O(1) 常数时间复杂度
-// 平均情况： O(n) 线性时间复杂度 => 性能提升：O(sqrt(n))
-// 最差情况： number = 27277 => T = n => O(n) => 性能提升：O(sqrt(n))
-
-// console.log(isPrime(1));
-// console.log(isPrime(2));
-console.log(isPrime(27277));
-// console.log(isPrime(9));
+console.log(isPowerOfTwo(5));
+console.log(isPowerOfTwo(8));
+console.log(isPowerOfTwo(12));
+console.log(isPowerOfTwo(13));
+console.log(isPowerOfTwo(16));
