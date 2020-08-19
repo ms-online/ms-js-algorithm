@@ -1,19 +1,18 @@
-// 如何返回斐波那契数列中下标为n的元素？
-
 function fib(n) {
-  const numbers = [1, 1]; // 1
-  for (let i = 2; i < n + 1; i++) {
-    // 1
-    console.log('123'); // n -1
-    counts++;
-    numbers.push(numbers[i - 2] + numbers[i - 1]); // n -1
+  // 3
+  if (n === 0 || n === 1) {
+    // [1,1,2,3,5,8]
+    return 1;
   }
-  // console.log(numbers);
-  return numbers[n]; //1
+  return fib(n - 1) + fib(n - 2);
 }
 
-// T = 1 + 1 + 2*(n - 1) + 1 = 1 + 2*n
-// T = 2*n
-// T = n => O(n) => 线性时间复杂度
+// n =3 => 3
+// fib(2) + fib(1);
+// fib(1) + fib(0) + 1
+// 1 + 1 + 1 = 3
 
-console.log(fib(4));
+// O(2^n)
+
+console.log(fib(5));
+console.log(fib(36));
