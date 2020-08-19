@@ -17,7 +17,7 @@ function fib(n, memo) {
 // fib(1) + fib(0) + 1
 // 1 + 1 + 1 = 3
 
-// O(2^n) 指数时间复杂度
+// O(n) 线性时间复杂度
 
 // console.log(fib(5, {})); // 空对象的原因：在递归的过程中，重复中间值才会被存储在对象里面
 // console.log(fib(6, {}));
@@ -31,6 +31,14 @@ console.log(counter);
 counter = 0;
 
 fib(20, {});
+console.log(counter);
+counter = 0;
+
+fib(30, {});
+console.log(counter);
+counter = 0;
+
+fib(40, {});
 console.log(counter);
 counter = 0;
 
