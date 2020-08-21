@@ -26,7 +26,7 @@ const objects = [
 ];
 // console.log(findElement(arr, 12));
 console.log(
-  findElement(objects, { name: 'Henry', age: 32 }, function (element, itme) {
-    return element.name === itme.name;
+  findElement(objects, { name: 'Henry', age: 32 }, function (element, item) {
+    return element.name === item.name;
   })
 );
