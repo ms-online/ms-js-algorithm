@@ -1,32 +1,24 @@
-function findElement(arr, element, comparatorFn) {
-  let index = 0;
-  for (const item of arr) {
-    // 判断是否为对象
-    if (
-      typeof element === 'object' &&
-      element !== null &&
-      comparatorFn(element, item)
-    ) {
-      return index;
+function findElement(sortedArr, element) {
+  let startIndex = 0;
+  let endIndex = sortedArr.length - 1;
+
+  while (startIndex <= endIndex) {
+    console.log('123');
+    //中间元素的下标
+    const middleIndex = startIndex + Math.floor((endIndex - startIndex) / 2); // 5 - 0 = 5 / 2= 2.5 = 2
+
+    // 判断中间元素和查找元素是否相等
+    if (element === sortedArr[middleIndex]) {
+      return middleIndex;
     }
-    // 数字或者字符串
-    if (item === element) {
-      return index;
+    //比较中间元素和查找元素的大小
+    if (sortedArr[middleIndex] < element) {
+      startIndex = middleIndex + 1; //重置数组起点下标
+    } else {
+      endIndex = middleIndex - 1; //重置数组的终点下标
     }
-    index++;
   }
 }
 
-const arr = [4, 9, -3, 0, 12, 5, 33];
-// const person = { name: 'Henry', age: 32 };
-
-const objects = [
-  { name: 'Summer', age: 26 },
-  { name: 'Henry', age: 32 },
-];
-// console.log(findElement(arr, 12));
-console.log(
-  findElement(objects, { name: 'Henry', age: 32 }, function (element, item) {
-    return element.name === item.name;
-  })
-);
+const arr = [1, 5, 9, 13, 99, 100];
+console.log(findElement(arr, 99));
