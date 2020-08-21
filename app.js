@@ -1,47 +1,32 @@
-let counter = 0; // 计算函数调用次数
-function fib(n, memo) {
-  let result; // 存储中间值
-  counter++;
-  if (memo[n]) return memo[n]; // 验证这个中间值是否存在，若存在就返回结果，不存在就跳过执行下方代码。
-  if (n === 0 || n === 1) {
-    result = 1;
-  } else {
-    result = fib(n - 1, memo) + fib(n - 2, memo);
+function findElement(arr, element, comparatorFn) {
+  let index = 0;
+  for (const item of arr) {
+    // 判断是否为对象
+    if (
+      typeof element === 'object' &&
+      element !== null &&
+      comparatorFn(element, item)
+    ) {
+      return index;
+    }
+    // 数字或者字符串
+    if (item === element) {
+      return index;
+    }
+    index++;
   }
-  memo[n] = result;
-  return result;
 }
 
-// n =3 => 3
-// fib(2) + fib(1);
-// fib(1) + fib(0) + 1
-// 1 + 1 + 1 = 3
+const arr = [4, 9, -3, 0, 12, 5, 33];
+// const person = { name: 'Henry', age: 32 };
 
-// O(n) 线性时间复杂度
-
-// console.log(fib(5, {})); // 空对象的原因：在递归的过程中，重复中间值才会被存储在对象里面
-// console.log(fib(6, {}));
-
-fib(5, {});
-console.log(counter);
-counter = 0;
-
-fib(10, {});
-console.log(counter);
-counter = 0;
-
-fib(20, {});
-console.log(counter);
-counter = 0;
-
-fib(30, {});
-console.log(counter);
-counter = 0;
-
-fib(40, {});
-console.log(counter);
-counter = 0;
-
-fib(50, {});
-console.log(counter);
-counter = 0;
+const objects = [
+  { name: 'Summer', age: 26 },
+  { name: 'Henry', age: 32 },
+];
+// console.log(findElement(arr, 12));
+console.log(
+  findElement(objects, { name: 'Henry', age: 32 }, function (element, itme) {
+    return element.name === itme.name;
+  })
+);
