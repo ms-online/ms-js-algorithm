@@ -1,35 +1,50 @@
 function sort(arr) {
-  const resultArray = [...arr]; //es6
+  //复制数组
+  const copyArr = [...arr];
+  console.log('开始执行函数');
+  console.log(arr);
 
-  //外层循环
-  for (let outer = 0; outer < resultArray.length; outer++) {
-    console.log('进入外层循环');
-    let outerEl = resultArray[outer];
-    //里层循环
-    for (let inner = outer + 1; inner < resultArray.length; inner++) {
-      let innerEl = resultArray[inner];
-      console.log('进入里层循环');
-      console.log('outerEl:' + outerEl);
-      console.log('innerEl:' + innerEl);
+  // base case 当分割数组只有一项的时候返回这个数组，跳出递归
+  if (copyArr.length <= 1) {
+    console.log('当数组只有一项，直接返回这个数组');
+    return copyArr;
+  }
 
-      // 对比
-      if (outerEl > innerEl) {
-        //交换位置
-        resultArray[outer] = innerEl;
-        resultArray[inner] = outerEl;
+  //初始化不同类型的数组容器
+  const smallerElementsArr = []; //存放比分界值小的元素
+  const biggerElementsArr = []; //存放比分界值大的元素
+  const pivotElement = copyArr.shift(); // 找到每个数组的分界值
+  const centerElementsArr = [pivotElement]; //存放分界值
 
-        outerEl = resultArray[outer];
-        innerEl = resultArray[inner];
-        console.log('进入if条件');
-        console.log(resultArray);
-      }
-      console.log('里层循环结束');
-      console.log(resultArray);
+  //递归步骤
+  while (copyArr.length) {
+    const currentElement = copyArr.shift(); //获取当前元素
+
+    //和分界值对比
+    if (currentElement === pivotElement) {
+      centerElementsArr.push(currentElement);
+    } else if (currentElement < pivotElement) {
+      smallerElementsArr.push(currentElement);
+    } else {
+      biggerElementsArr.push(currentElement);
     }
   }
-  return resultArray;
+
+  console.log('while循环执行完之后');
+  console.log(smallerElementsArr);
+  console.log(centerElementsArr);
+  console.log(biggerElementsArr);
+
+  //已经被排序好的数组
+  const smallerElementsSortedArr = sort(smallerElementsArr);
+  const biggerElementsSortedArr = sort(biggerElementsArr);
+
+  return smallerElementsSortedArr.concat(
+    centerElementsArr,
+    biggerElementsSortedArr
+  );
 }
 
-// const sortedArr = [4, 12, -3, -8, 1, 72, 36];
-const sortedArr = [4, 12, -3, 0];
-console.log(sort(sortedArr));
+// const sortedArray = sort([-2, 9, 3, 41, -2, -6, 35, 18]);
+const sortedArray = sort([-2, 9, -3, 41, -7]);
+console.log(sortedArray);
