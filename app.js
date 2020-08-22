@@ -45,6 +45,23 @@ function sort(arr) {
   );
 }
 
+//最差情况
+//已经排序数组 => O(n^2) 平方时间复杂度
+// [1,2,3]
+// small []
+// center [1]
+// big [2,3]
+// small []
+// center [2]
+// big [3]
+
+//最好情况
+// 元素是无序排列的
+// a = 2(子问题数量); b= 2（拆分的值）;log2(2)=1;
+// 递归步骤运行时间：O(n^logb(a)) => O(n^log2(2)) => O(n^1) => O(n) 线性时间复杂度
+// 递归外的运行时间：O(n);
+// 整个算法的运行时间：O(n^logb(a) * logn) => O(n^log2(2) * logn) => O(n^1 * logn) => O(n* logn) 线性对数时间复杂度
+
 // const sortedArray = sort([-2, 9, 3, 41, -2, -6, 35, 18]);
 const sortedArray = sort([-2, 9, -3, 41, -7]);
 console.log(sortedArray);
