@@ -23,6 +23,16 @@ function findElement(sortedArr, element, offset) {
     offset
   );
 }
+//递归运行时间： O(n^logb a)
+// a = 1;
+// b = 2;
+// O(n^log2 1) =>log2 1 = 0; 2^0 = 1 => log2 1 = 0; 2^3 = 8 => log2 8 = 3
+// O(n^0) => O(1);
+
+//递归以外的运行时间：O(fn) => O(1);
+
+//整个函数的时间复杂度O(n^logb a * log n)
+// O(n^log2 1 * logn) => O(n^0 *logn) => O(1 * logn) => O(logn) //对数时间复杂度
 
 const arr = [1, 5, 9, 13, 99, 100];
 console.log(findElement(arr, 99, 0));
