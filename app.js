@@ -7,6 +7,7 @@ function fact(number) {
 }
 
 // T : O(n);
+//空间复杂度：O(1) => 常数空间复杂度
 
 console.log(fact(3));
 console.log(fact(4));
