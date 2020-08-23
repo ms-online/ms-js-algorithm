@@ -53,3 +53,12 @@ function sort(arr) {
 // const sortedArray = sort([43, -12, 5, 12, 8, 2, -20, 100]);
 const sortedArray = sort([43, -12, 60, -30, 100]);
 console.log(sortedArray);
+
+// a = 2, b= 2;
+//递归步骤的时间复杂度：O(n^logb(a)) => O(n^log2(2)) => O(n^1) => O(n);
+//递归外的时间复杂度：O(n);
+//整个函数的时间复杂度：O(n^logb(a) * logn) => O(n^logb(a) * logn) => O(n^1 * logn) => O(n * logn)
+//线性对数 VS 平方
+// n = 3
+// 平方：3^2 = 9
+// 3*log3 = 3*1.5 = 4.5
