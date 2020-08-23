@@ -22,3 +22,5 @@ function findElement(sortedArr, element) {
 
 const arr = [1, 5, 9, 13, 99, 100];
 console.log(findElement(arr, 99));
+
+//空间复杂度：O(1)
