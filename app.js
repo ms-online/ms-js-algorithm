@@ -33,3 +33,5 @@ function sort(arr) {
 // const sortedArr = [4, 12, -3, -8, 1, 72, 36];
 const sortedArr = [4, 12, -3, 0];
 console.log(sort(sortedArr));
+
+//空间复杂度：O(1);
