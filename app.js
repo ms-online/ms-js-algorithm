@@ -62,3 +62,5 @@ console.log(sortedArray);
 // n = 3
 // 平方：3^2 = 9
 // 3*log3 = 3*1.5 = 4.5
+
+//空间复杂度:O(n)
