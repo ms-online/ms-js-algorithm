@@ -1,48 +1,40 @@
-//传入的集合个数大于2的情况，如何实现笛卡尔乘积算法？
-//
-function cartProduct(setA, setB) {
-  const product = [];
+//无重复元素的全排列
 
-  for (let setAEl of setA) {
-    if (!Array.isArray(setAEl)) {
-      setAEl = [setAEl];
-    }
-    for (const setBEl of setB) {
-      console.log(123);
-      product.push([...setAEl, setBEl]); //[['green','M],'T-shirt'] 展开运算符合并数组
+function getPermutations(options) {
+  const permutations = [];
+  console.log('进入函数开始执行');
+  console.log(options);
+  if (options.length === 1) {
+    return [options];
+  }
+
+  //递归步骤
+  const partialPermutations = getPermutations(options.slice(1)); //[['4']]
+  console.log('递归步骤执行完毕');
+  console.log(partialPermutations);
+  const firstOption = options[0]; //3
+  console.log('数组第一项');
+  console.log(firstOption);
+
+  //使用for循环进行排列
+  for (let i = 0; i < partialPermutations.length; i++) {
+    //得到每一项排列数组
+    const partialPermutation = partialPermutations[i];
+    console.log('进入外层循环');
+    console.log(partialPermutation);
+    for (let j = 0; j <= partialPermutation.length; j++) {
+      ///得到每一项排列数组里面的元素
+      const permutationInfront = partialPermutation.slice(0, j); //[] [3] [3,4]
+      const permutationAfter = partialPermutation.slice(j); //[3,4] [4] []
+      permutations.push(
+        permutationInfront.concat([firstOption], permutationAfter) // [2,3,4] [3,4,2] [3,4,2]
+      );
     }
   }
-  return product;
+  return permutations;
 }
 
-//不限制传入的参数（集合）个数
-//剩余参数允许我们将一个不定数量的参数表示为一个数组
-function cartesians(...sets) {
-  let tempProuct = sets[0];
-  // console.log(sets);
-  //遍历数组里面的每一个参数，每次使用2个参数调用cartProduct函数，返回一个临时的product
+const items = ['1', '2', '3', '4'];
+console.log(getPermutations(items));
 
-  for (let i = 1; i < sets.length; i++) {
-    tempProuct = cartProduct(tempProuct, sets[i]);
-  }
-  return tempProuct;
-}
-
-const colors = ['green', 'red', 'blue'];
-const sizes = ['M', 'L'];
-const styles = ['T-shirt', 'coat'];
-
-// console.log(cartProduct(colors, sizes));
-console.log(cartesians(colors, sizes, styles));
-
-// n 第一个数组的长度，m第二个数组的长度
-//时间复杂度 ：O(n*m)  //最差情况：以最长数组的长度来统一全部数组的长度：O(n*n) => O(n^2)
-//空间复杂度 ：O(n*m)  //最差情况：以最长数组的长度来统一全部数组的长度：O(n*n) => O(n^2)
-
-//不限制传入参数的情况
-//时间复杂度：O(n*n)=>O(n^2), O(n*n*n)=>O(n^3) ===> O(n^x) // x代表参数的个数
-//空间复杂度：O(n*n)=>O(n^2), O(n*n*n)=>O(n^3) ===> O(n^x) // x代表参数的个数
-
-// const arr = [1, 2, 3];
-// const newArr = [...arr, 4];
-// console.log(newArr);
+//时间复杂度：O(n!) 4*3**2*1 = 24; 5*4*3*2*1 = 120; 6! = 720;
