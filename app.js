@@ -1,40 +1,33 @@
-//无重复元素的全排列
-
-function getPermutations(options) {
-  const permutations = [];
+//有重复元素的全排列
+function getPermutaions(options, length) {
   console.log('进入函数开始执行');
   console.log(options);
-  if (options.length === 1) {
-    return [options];
+  console.log(length);
+  const permutations = [];
+
+  if (length === 1) {
+    //[[1],[2],[3]]
+    console.log(options.map((option) => [option]));
+    return options.map((option) => [option]);
   }
-
-  //递归步骤
-  const partialPermutations = getPermutations(options.slice(1)); //[['4']]
-  console.log('递归步骤执行完毕');
+  const partialPermutations = getPermutaions(options, length - 1);
+  console.log('递归执行完毕');
   console.log(partialPermutations);
-  const firstOption = options[0]; //3
-  console.log('数组第一项');
-  console.log(firstOption);
-
-  //使用for循环进行排列
-  for (let i = 0; i < partialPermutations.length; i++) {
-    //得到每一项排列数组
-    const partialPermutation = partialPermutations[i];
+  //for循环进行全排列
+  for (const option of options) {
     console.log('进入外层循环');
-    console.log(partialPermutation);
-    for (let j = 0; j <= partialPermutation.length; j++) {
-      ///得到每一项排列数组里面的元素
-      const permutationInfront = partialPermutation.slice(0, j); //[] [3] [3,4]
-      const permutationAfter = partialPermutation.slice(j); //[3,4] [4] []
-      permutations.push(
-        permutationInfront.concat([firstOption], permutationAfter) // [2,3,4] [3,4,2] [3,4,2]
-      );
+    console.log(option);
+    for (const existingPermutation of partialPermutations) {
+      console.log('进入里层循环');
+      console.log(existingPermutation);
+      permutations.push([option].concat(existingPermutation));
     }
   }
-  return permutations;
+  return permutations; //[[1,1],[1,2],[1,3]]
 }
 
-const items = ['1', '2', '3', '4'];
-console.log(getPermutations(items));
+const number = [1, 2, 3];
+const resultLength = 3;
 
-//时间复杂度：O(n!) 4*3**2*1 = 24; 5*4*3*2*1 = 120; 6! = 720;
+console.log(getPermutaions(number, resultLength));
+//时间复杂度：O(n^r) => n是数组长度（options），r是要求的组合长度
