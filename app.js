@@ -1,33 +1,45 @@
-//有重复元素的全排列
-function getPermutaions(options, length) {
-  console.log('进入函数开始执行');
-  console.log(options);
-  console.log(length);
-  const permutations = [];
+function knapsack(items, cap, itemIndex) {
+  //跳出递归
+  if (cap === 0 || itemIndex < 0) {
+    return { items: [], value: 0, weight: 0 };
+  }
+  //物品是否大于背包最大承载量
+  if (cap < items[itemIndex].weight) {
+    return knapsack(items, cap, itemIndex - 1);
+  }
 
-  if (length === 1) {
-    //[[1],[2],[3]]
-    console.log(options.map((option) => [option]));
-    return options.map((option) => [option]);
+  //放入物品
+  const sackWithItem = knapsack(
+    items,
+    cap - items[itemIndex].weight,
+    itemIndex - 1
+  );
+  //不放入物品
+  const sackWithoutItem = knapsack(items, cap, itemIndex - 1);
+  //获取价值
+  const valueWithItem = sackWithItem.value + items[itemIndex].value;
+  const valueWithoutItem = sackWithoutItem.value;
+
+  //价值比较
+  if (valueWithItem > valueWithoutItem) {
+    const updateSack = {
+      items: sackWithItem.items.concat(items[itemIndex]),
+      value: sackWithItem.value + items[itemIndex].value,
+      weight: sackWithItem.weight + items[itemIndex].weight,
+    };
+
+    return updateSack;
+  } else {
+    return sackWithoutItem;
   }
-  const partialPermutations = getPermutaions(options, length - 1);
-  console.log('递归执行完毕');
-  console.log(partialPermutations);
-  //for循环进行全排列
-  for (const option of options) {
-    console.log('进入外层循环');
-    console.log(option);
-    for (const existingPermutation of partialPermutations) {
-      console.log('进入里层循环');
-      console.log(existingPermutation);
-      permutations.push([option].concat(existingPermutation));
-    }
-  }
-  return permutations; //[[1,1],[1,2],[1,3]]
 }
+const items = [
+  { name: 'a', value: 5, weight: 4 },
+  { name: 'b', value: 8, weight: 10 },
+  { name: 'c', value: 6, weight: 3 },
+];
 
-const number = [1, 2, 3];
-const resultLength = 3;
+const maxCap = 10;
 
-console.log(getPermutaions(number, resultLength));
-//时间复杂度：O(n^r) => n是数组长度（options），r是要求的组合长度
+const sack = knapsack(items, maxCap, items.length - 1);
+console.log(sack);
