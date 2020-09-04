@@ -1,24 +1,21 @@
-function knapsack(elements, capacity) {
-  const sack = { items: [], value: 0, weight: 0 };
-  let remainingCapacity = capacity;
-
-  for (const element of elements) {
-    if (element.weight <= remainingCapacity) {
-      sack.items.push(element);
-      sack.value += element.value;
-      sack.weight += element.weight;
-      remainingCapacity -= element.weight;
-    }
+function computeChange(coins, amount) {
+  let remainingAmount = amount;
+  const calculatedChange = {
+    selectedCoins: {},
+    numberOfCoins: 0,
+  };
+  for (const coin of coins) {
+    const count = Math.floor(remainingAmount / coin);
+    calculatedChange.selectedCoins[coin] = count;
+    calculatedChange.numberOfCoins += count;
+    remainingAmount = remainingAmount - coin * count;
   }
-  return sack;
+  return calculatedChange;
 }
-const items = [
-  { name: 'a', value: 5, weight: 4 },
-  { name: 'b', value: 8, weight: 8 },
-  { name: 'c', value: 6, weight: 3 },
-];
+const availableCoins = [100, 50, 20, 5, 2, 1];
+const targetAmount = 129;
 
-const maxCap = 8;
+const change = computeChange(availableCoins, targetAmount);
+console.log(change);
 
-const sack = knapsack(items, maxCap);
-console.log(sack);
+//时间复杂度 ： O(n)
